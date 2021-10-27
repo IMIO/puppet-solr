@@ -8,8 +8,9 @@ class solr::install {
   include 'archive'
 
   file { $solr::staging_dir:
-    ensure  => directory,
-    recurse => true
+    ensure    => directory,
+    recurse   => true,
+    max_files => -1,
   }
 
   archive { "${solr::staging_dir}/solr-${solr::version}.tgz":
@@ -42,11 +43,12 @@ class solr::install {
   }
 
   file { $solr::var_dir:
-    ensure  => directory,
-    owner   => $solr::solr_user,
-    group   => $solr::solr_user,
-    recurse => true,
-    require => Exec['run solr install script'],
+    ensure    => directory,
+    owner     => $solr::solr_user,
+    group     => $solr::solr_user,
+    recurse   => true,
+    require   => Exec['run solr install script'],
+    max_files => -1,
   }
 
   file { $solr::log_dir:
