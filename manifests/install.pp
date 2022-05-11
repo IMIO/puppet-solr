@@ -47,7 +47,6 @@ class solr::install {
     group     => $solr::solr_user,
     recurse   => true,
     require   => Exec['run solr install script'],
-    max_files => -1,
   }
 
   file { $solr::log_dir:
